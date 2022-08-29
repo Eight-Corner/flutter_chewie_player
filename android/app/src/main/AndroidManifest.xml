@@ -31,4 +31,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+<!--    안드로이드 Player 의존성 추가 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
