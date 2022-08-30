@@ -26,6 +26,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "chewie",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/chewie-1.3.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.13"
+    },
+    {
       "name": "clock",
       "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/clock-1.1.0",
       "packageUri": "lib/",
@@ -54,6 +60,12 @@
       "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "ffi",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/ffi-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "flutter",
@@ -116,6 +128,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.1",
       "packageUri": "lib/",
@@ -124,6 +142,12 @@
     {
       "name": "plugin_platform_interface",
       "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/provider-6.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -206,13 +230,49 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "wakelock",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.6.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "wakelock_macos",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_macos-0.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "wakelock_platform_interface",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_platform_interface-0.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "wakelock_web",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_web-0.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "wakelock_windows",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_windows-0.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "win32",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_test_app",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-08-29T06:19:29.871963Z",
+  "generated": "2022-08-30T05:05:35.453102Z",
   "generator": "pub",
   "generatorVersion": "2.17.6"
 }
