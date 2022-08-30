@@ -200,6 +200,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "very_good_analysis",
+      "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/very_good_analysis-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "video_player",
       "rootUri": "file:///Users/sgrsoft/flutter/.pub-cache/hosted/pub.dartlang.org/video_player-2.4.7",
       "packageUri": "lib/",
@@ -266,13 +272,13 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "flutter_test_app",
+      "name": "chewie_video_demo_corner",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-08-30T05:05:35.453102Z",
+  "generated": "2022-08-30T06:27:48.771723Z",
   "generator": "pub",
   "generatorVersion": "2.17.6"
 }

@@ -1,0 +1,28 @@
+PODS:
+  - Flutter (1.0.0)
+  - video_player_avfoundation (0.0.1):
+    - Flutter
+  - wakelock (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
+  - wakelock (from `.symlinks/plugins/wakelock/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  video_player_avfoundation:
+    :path: ".symlinks/plugins/video_player_avfoundation/ios"
+  wakelock:
+    :path: ".symlinks/plugins/wakelock/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  video_player_avfoundation: 9baba93256e79b502b12fb28317ffd930d08ec81
+  wakelock: bd0d9e450e845007d009c8ae216aaed87f82fbf3
+
+PODFILE CHECKSUM: 51cf704c0cb7f9518b29c0ce1649512025d7689a
+
+COCOAPODS: 1.11.3
