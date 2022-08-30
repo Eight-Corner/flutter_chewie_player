@@ -99,7 +99,6 @@ class _ChewieDemoState extends State<ChewieDemo> {
       videoPlayerController: _videoPlayerController1,
       autoPlay: true,
       looping: true,
-      aspectRatio: 16 / 9,
       progressIndicatorDelay:
           bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
@@ -159,8 +158,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
     return MaterialApp(
       title: widget.title,
       theme: AppTheme.light.copyWith(
-        // platform: _platform ?? Theme.of(context).platform, // default 플랫폼 설정
-        platform: _platform = TargetPlatform.windows,
+        platform: _platform ?? Theme.of(context).platform,
       ),
       home: Scaffold(
         appBar: null,
@@ -182,6 +180,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
                           Text('로딩중..'),
                         ],
                       ),
+
               ),
             ),
             TextButton(
@@ -190,8 +189,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
               },
               child: const Text('Fullscreen'),
             ),
-            TextButton(onPressed: toggleVideo, child: const Text('비디오 전환')),
-            Row(
+            /*Row(
               children: <Widget>[
                 Expanded(
                   child: TextButton(
@@ -208,7 +206,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
                     ),
                   ),
                 ),
-                /*Expanded(
+                Expanded(
                   child: TextButton(
                     onPressed: () {
                       setState(() {
@@ -226,12 +224,12 @@ class _ChewieDemoState extends State<ChewieDemo> {
                       child: Text("Portrait Video"),
                     ),
                   ),
-                )*/
+                ),
               ],
             ),
-        /*    Row(
+            Row(
               children: <Widget>[
-              *//*  Expanded(
+                Expanded(
                   child: TextButton(
                     onPressed: () {
                       setState(() {
@@ -243,8 +241,8 @@ class _ChewieDemoState extends State<ChewieDemo> {
                       child: Text("Android controls"),
                     ),
                   ),
-                ),*//*
-                *//*Expanded(
+                ),
+                Expanded(
                   child: TextButton(
                     onPressed: () {
                       setState(() {
@@ -256,7 +254,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
                       child: Text("iOS controls"),
                     ),
                   ),
-                )*//*
+                )
               ],
             ),*/
             Row(
@@ -270,10 +268,11 @@ class _ChewieDemoState extends State<ChewieDemo> {
                     },
                     child: const Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text("컨트롤.."),
+                      child: Text("커스텀 컨트롤"),
                     ),
                   ),
                 ),
+                Expanded(child: TextButton(onPressed: toggleVideo, child: const Text('비디오 전환')),)
               ],
             ),
           ],
