@@ -22,7 +22,6 @@ class ChewieDemo extends StatefulWidget {
 class _ChewieDemoState extends State<ChewieDemo> {
   TargetPlatform? _platform;
   late VideoPlayerController _videoPlayerController1;
-  late VideoPlayerController _videoPlayerController2;
   ChewieController? _chewieController;
   int? bufferDelay;
 
@@ -35,7 +34,6 @@ class _ChewieDemoState extends State<ChewieDemo> {
   @override
   void dispose() {
     _videoPlayerController1.dispose();
-    _videoPlayerController2.dispose();
     _chewieController?.dispose();
     super.dispose();
   }
@@ -49,18 +47,14 @@ class _ChewieDemoState extends State<ChewieDemo> {
   Future<void> initializePlayer() async {
     _videoPlayerController1 =
         VideoPlayerController.network(srcs[currPlayIndex]);
-    _videoPlayerController2 =
-        VideoPlayerController.network(srcs[currPlayIndex]);
     await Future.wait([
       _videoPlayerController1.initialize(),
-      _videoPlayerController2.initialize()
     ]);
     _createChewieController();
     setState(() {});
   }
 
   void _createChewieController() {
-
     final subtitles = [
       Subtitle(
         index: 0,
@@ -100,7 +94,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
       autoPlay: true,
       looping: true,
       progressIndicatorDelay:
-          bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
+      bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
       additionalOptions: (context) {
         return <OptionItem>[
@@ -112,17 +106,18 @@ class _ChewieDemoState extends State<ChewieDemo> {
         ];
       },
       subtitle: Subtitles(subtitles),
-      subtitleBuilder: (context, dynamic subtitle) => Container(
-        padding: const EdgeInsets.all(10.0),
-        child: subtitle is InlineSpan
-            ? RichText(
-                text: subtitle,
-              )
-            : Text(
-                subtitle.toString(),
-                style: const TextStyle(color: Colors.black),
-              ),
-      ),
+      subtitleBuilder: (context, dynamic subtitle) =>
+          Container(
+            padding: const EdgeInsets.all(10.0),
+            child: subtitle is InlineSpan
+                ? RichText(
+              text: subtitle,
+            )
+                : Text(
+              subtitle.toString(),
+              style: const TextStyle(color: Colors.black),
+            ),
+          ),
 
       hideControlsTimer: const Duration(seconds: 3),
 
@@ -165,23 +160,15 @@ class _ChewieDemoState extends State<ChewieDemo> {
         body: Column(
           children: <Widget>[
             Expanded(
-              child: Center(
-                child: _chewieController != null &&
-                        _chewieController!
-                            .videoPlayerController.value.isInitialized
-                    ? Chewie(
+                child: Center(
+                    child: _videoPlayerController1.value.isInitialized
+                        ? AspectRatio(
+                      aspectRatio: _videoPlayerController1.value.aspectRatio,
+                      child: Chewie(
                         controller: _chewieController!,
-                      )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          CircularProgressIndicator(),
-                          SizedBox(height: 20),
-                          Text('로딩중..'),
-                        ],
                       ),
-
-              ),
+                    ) : Container()
+                )
             ),
             TextButton(
               onPressed: () {
@@ -210,10 +197,10 @@ class _ChewieDemoState extends State<ChewieDemo> {
                   child: TextButton(
                     onPressed: () {
                       setState(() {
-                        _videoPlayerController2.pause();
-                        _videoPlayerController2.seekTo(Duration.zero);
+                        _videoPlayerController1.pause();
+                        _videoPlayerController1.seekTo(Duration.zero);
                         _chewieController = _chewieController!.copyWith(
-                          videoPlayerController: _videoPlayerController2,
+                          videoPlayerController: _videoPlayerController1,
                           autoPlay: true,
                           looping: true,
                         );
@@ -263,16 +250,21 @@ class _ChewieDemoState extends State<ChewieDemo> {
                   child: TextButton(
                     onPressed: () {
                       setState(() {
-                        _platform = TargetPlatform.windows;
+                        if (_platform == TargetPlatform.windows) {
+                          _platform = Theme.of(context).platform;
+                        } else {
+                          _platform = TargetPlatform.windows;
+                        }
                       });
                     },
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      padding: EdgeInsets.symmetric(vertical: 0.0),
                       child: Text("커스텀 컨트롤"),
                     ),
                   ),
                 ),
-                Expanded(child: TextButton(onPressed: toggleVideo, child: const Text('비디오 전환')),)
+                Expanded(child: TextButton(
+                    onPressed: toggleVideo, child: const Text('비디오 전환')),)
               ],
             ),
           ],
