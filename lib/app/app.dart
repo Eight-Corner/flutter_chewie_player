@@ -41,18 +41,16 @@ class _ChewieDemoState extends State<ChewieDemo> {
   }
 
   List<String> srcs = [
-    // "https://assets.mixkit.co/videos/preview/mixkit-spinning-around-the-earth-29351-large.mp4",
-    // "https://assets.mixkit.co/videos/preview/mixkit-daytime-city-traffic-aerial-view-56-large.mp4",
-    // "https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4"
-    'assets/videos/ive.mp4',
-    'assets/videos/instagram_video.mp4'
+    "https://assets.mixkit.co/videos/preview/mixkit-spinning-around-the-earth-29351-large.mp4",
+    "https://assets.mixkit.co/videos/preview/mixkit-daytime-city-traffic-aerial-view-56-large.mp4",
+    "https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4"
   ];
 
   Future<void> initializePlayer() async {
     _videoPlayerController1 =
-        VideoPlayerController.asset(srcs[currPlayIndex]);
+        VideoPlayerController.network(srcs[currPlayIndex]);
     _videoPlayerController2 =
-        VideoPlayerController.asset(srcs[currPlayIndex]);
+        VideoPlayerController.network(srcs[currPlayIndex]);
     await Future.wait([
       _videoPlayerController1.initialize(),
       _videoPlayerController2.initialize()
@@ -89,7 +87,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
         index: 0,
         start: const Duration(seconds: 10),
         end: const Duration(seconds: 20),
-        text: 'Whats up? :)',
+        text: '? :)',
         // text: const TextSpan(
         //   text: 'Whats up? :)',
         //   style: TextStyle(color: Colors.amber, fontSize: 22, fontStyle: FontStyle.italic),
@@ -186,12 +184,12 @@ class _ChewieDemoState extends State<ChewieDemo> {
                       ),
               ),
             ),
-            TextButton(
+            /*TextButton(
               onPressed: () {
                 _chewieController?.enterFullScreen();
               },
               child: const Text('Fullscreen'),
-            ),
+            ),*/
             Row(
               children: <Widget>[
                 Expanded(
@@ -266,7 +264,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
                     ),
                   ),
                 ),
-                Expanded(
+                /*Expanded(
                   child: TextButton(
                     onPressed: () {
                       setState(() {
@@ -278,7 +276,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
                       child: Text("iOS controls"),
                     ),
                   ),
-                )
+                )*/
               ],
             ),
             Row(
@@ -292,79 +290,14 @@ class _ChewieDemoState extends State<ChewieDemo> {
                     },
                     child: const Padding(
                       padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text("Desktop controls"),
+                      child: Text("controls.."),
                     ),
                   ),
                 ),
               ],
             ),
-            if (Platform.isAndroid)
-              ListTile(
-                title: const Text("Delay"),
-                subtitle: DelaySlider(
-                  delay:
-                      _chewieController?.progressIndicatorDelay?.inMilliseconds,
-                  onSave: (delay) async {
-                    if (delay != null) {
-                      bufferDelay = delay == 0 ? null : delay;
-                      await initializePlayer();
-                    }
-                  },
-                ),
-              )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class DelaySlider extends StatefulWidget {
-  const DelaySlider({Key? key, required this.delay, required this.onSave})
-      : super(key: key);
-
-  final int? delay;
-  final void Function(int?) onSave;
-  @override
-  State<DelaySlider> createState() => _DelaySliderState();
-}
-
-class _DelaySliderState extends State<DelaySlider> {
-  int? delay;
-  bool saved = false;
-
-  @override
-  void initState() {
-    super.initState();
-    delay = widget.delay;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    const int max = 1000;
-    return ListTile(
-      title: Text(
-        "Progress indicator delay ${delay != null ? "${delay.toString()} MS" : ""}",
-      ),
-      subtitle: Slider(
-        value: delay != null ? (delay! / max) : 0,
-        onChanged: (value) async {
-          delay = (value * max).toInt();
-          setState(() {
-            saved = false;
-          });
-        },
-      ),
-      trailing: IconButton(
-        icon: const Icon(Icons.save),
-        onPressed: saved
-            ? null
-            : () {
-                widget.onSave(delay);
-                setState(() {
-                  saved = true;
-                });
-              },
       ),
     );
   }
