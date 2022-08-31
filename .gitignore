@@ -2,6 +2,10 @@
 .idea/
 .vscode/
 
+# dart
+.dart_tool/
+#flutter
+.pub/
 
 # Built application files
 *.apk
