@@ -91,6 +91,11 @@ class _PlayerDemoState extends State<PlayerDemo> {
           ),
         ];
       },
+      optionsTranslation: OptionsTranslation(
+        playbackSpeedButtonText: '재생속도',
+        cancelButtonText: '닫기',
+      ),
+
       // 자막 세팅
       subtitle: Subtitles(subtitles),
       subtitleBuilder: (context, dynamic subtitle) => Container(
