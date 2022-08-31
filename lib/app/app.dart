@@ -5,8 +5,8 @@ import 'package:chewie_video_demo_corner/app/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class ChewieDemo extends StatefulWidget {
-  const ChewieDemo({
+class PlayerDemo extends StatefulWidget {
+  const PlayerDemo({
     Key? key,
     this.title = '',
   }) : super(key: key);
@@ -15,11 +15,11 @@ class ChewieDemo extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _ChewieDemoState();
+    return _PlayerDemoState();
   }
 }
 
-class _ChewieDemoState extends State<ChewieDemo> {
+class _PlayerDemoState extends State<PlayerDemo> {
   TargetPlatform? _platform;
   late VideoPlayerController _videoPlayerController1;
   ChewieController? _chewieController;
@@ -55,6 +55,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
   }
 
   void _createChewieController() {
+    // 자막 세팅
     final subtitles = [
       Subtitle(
         index: 0,
@@ -63,29 +64,11 @@ class _ChewieDemoState extends State<ChewieDemo> {
         text: const TextSpan(
           children: [
             TextSpan(
-              text: 'Hello',
+              text: '자막1',
               style: TextStyle(color: Colors.red, fontSize: 22),
             ),
-            TextSpan(
-              text: ' from ',
-              style: TextStyle(color: Colors.red, fontSize: 20),
-            ),
-            TextSpan(
-              text: 'subtitles',
-              style: TextStyle(color: Colors.red, fontSize: 18),
-            )
           ],
         ),
-      ),
-      Subtitle(
-        index: 0,
-        start: const Duration(seconds: 10),
-        end: const Duration(seconds: 20),
-        text: '? :)',
-        // text: const TextSpan(
-        //   text: 'Whats up? :)',
-        //   style: TextStyle(color: Colors.amber, fontSize: 22, fontStyle: FontStyle.italic),
-        // ),
       ),
     ];
 
@@ -94,8 +77,9 @@ class _ChewieDemoState extends State<ChewieDemo> {
       autoPlay: true,
       looping: true,
       progressIndicatorDelay:
-      bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
+          bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
+      // 설정 셋업
       additionalOptions: (context) {
         return <OptionItem>[
           OptionItem(
@@ -105,34 +89,35 @@ class _ChewieDemoState extends State<ChewieDemo> {
           ),
         ];
       },
+      // 자막 세팅
       subtitle: Subtitles(subtitles),
-      subtitleBuilder: (context, dynamic subtitle) =>
-          Container(
-            padding: const EdgeInsets.all(10.0),
-            child: subtitle is InlineSpan
-                ? RichText(
-              text: subtitle,
-            )
-                : Text(
-              subtitle.toString(),
-              style: const TextStyle(color: Colors.black),
-            ),
-          ),
+      subtitleBuilder: (context, dynamic subtitle) => Container(
+        padding: const EdgeInsets.all(10.0),
+        child: subtitle is InlineSpan
+            ? RichText(
+                text: subtitle,
+              )
+            : Text(
+                subtitle.toString(),
+                style: const TextStyle(color: Colors.black),
+              ),
+      ),
 
+      // controls 숨김 타이머
       hideControlsTimer: const Duration(seconds: 3),
 
-      // Try playing around with some of these other options:
+      // 플레이어 옵션:
+      showControls: true,
 
-      // showControls: false,
-      // materialProgressColors: ChewieProgressColors(
-      //   playedColor: Colors.red,
-      //   handleColor: Colors.blue,
-      //   backgroundColor: Colors.grey,
-      //   bufferedColor: Colors.lightGreen,
-      // ),
-      // placeholder: Container(
-      //   color: Colors.grey,
-      // ),
+      materialProgressColors: ChewieProgressColors(
+        playedColor: Colors.red,
+        handleColor: Colors.red,
+        backgroundColor: Colors.black,
+        bufferedColor: Colors.grey,
+      ),
+      placeholder: Container(
+        color: Colors.black,
+      ),
       // autoInitialize: true,
     );
   }
@@ -152,7 +137,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: widget.title,
-      theme: AppTheme.light.copyWith(
+      theme: AppTheme.dark.copyWith(
         platform: _platform ?? Theme.of(context).platform,
       ),
       home: Scaffold(
@@ -161,89 +146,26 @@ class _ChewieDemoState extends State<ChewieDemo> {
           children: <Widget>[
             Expanded(
                 child: Center(
-                    child: _videoPlayerController1.value.isInitialized
-                        ? AspectRatio(
-                      aspectRatio: _videoPlayerController1.value.aspectRatio,
-                      child: Chewie(
-                        controller: _chewieController!,
-                      ),
-                    ) : Container()
-                )
-            ),
+              child: _chewieController != null &&
+                      _chewieController!.videoPlayerController.value.isInitialized
+                  ? Chewie(
+                      controller: _chewieController!,
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        CircularProgressIndicator(),
+                        SizedBox(height: 20),
+                        Text('로딩중..'),
+                      ],
+                    ),
+            )),
             TextButton(
               onPressed: () {
                 _chewieController?.enterFullScreen();
               },
               child: const Text('Fullscreen'),
             ),
-            /*Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _videoPlayerController1.pause();
-                        _videoPlayerController1.seekTo(Duration.zero);
-                        _createChewieController();
-                      });
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text("Landscape Video"),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _videoPlayerController1.pause();
-                        _videoPlayerController1.seekTo(Duration.zero);
-                        _chewieController = _chewieController!.copyWith(
-                          videoPlayerController: _videoPlayerController1,
-                          autoPlay: true,
-                          looping: true,
-                        );
-                      });
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text("Portrait Video"),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _platform = TargetPlatform.android;
-                      });
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text("Android controls"),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      setState(() {
-                        _platform = TargetPlatform.iOS;
-                      });
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text("iOS controls"),
-                    ),
-                  ),
-                )
-              ],
-            ),*/
             Row(
               children: <Widget>[
                 Expanded(
@@ -258,13 +180,15 @@ class _ChewieDemoState extends State<ChewieDemo> {
                       });
                     },
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 0.0),
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
                       child: Text("커스텀 컨트롤"),
                     ),
                   ),
                 ),
-                Expanded(child: TextButton(
-                    onPressed: toggleVideo, child: const Text('비디오 전환')),)
+                Expanded(
+                  child: TextButton(
+                      onPressed: toggleVideo, child: const Text('비디오 전환')),
+                )
               ],
             ),
           ],
