@@ -11,7 +11,7 @@ class AppTheme {
 
   static final dark = ThemeData(
     brightness: Brightness.dark,
-    colorScheme: const ColorScheme.dark(secondary: Colors.black),
+    colorScheme: const ColorScheme.dark(secondary: Colors.red),
     disabledColor: Colors.grey.shade400,
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );

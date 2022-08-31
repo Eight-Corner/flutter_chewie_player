@@ -39,11 +39,11 @@ class _PlayerDemoState extends State<PlayerDemo> {
   }
 
   List<String> srcs = [
-    // "https://assets.mixkit.co/videos/preview/mixkit-spinning-around-the-earth-29351-large.mp4",
-    // "https://assets.mixkit.co/videos/preview/mixkit-daytime-city-traffic-aerial-view-56-large.mp4",
-    // "https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4"
     "https://res.cloudinary.com/dtdnarsy1/video/upload/v1661918926/ive_fmlybl.mp4",
     "https://res.cloudinary.com/dtdnarsy1/video/upload/v1661918923/instagram_video_kjgarl.mp4",
+    "https://assets.mixkit.co/videos/preview/mixkit-spinning-around-the-earth-29351-large.mp4",
+    "https://assets.mixkit.co/videos/preview/mixkit-daytime-city-traffic-aerial-view-56-large.mp4",
+    "https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4"
   ];
 
   Future<void> initializePlayer() async {
@@ -77,10 +77,8 @@ class _PlayerDemoState extends State<PlayerDemo> {
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
       autoPlay: true,
-      looping: true,
+      looping: false,
       aspectRatio: _videoPlayerController1.value.aspectRatio,
-      progressIndicatorDelay:
-          bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
       // 설정 셋업
       additionalOptions: (context) {
@@ -115,12 +113,12 @@ class _PlayerDemoState extends State<PlayerDemo> {
       hideControlsTimer: const Duration(seconds: 3),
 
       // 플레이어 옵션:
-      showControls: true,
+
       materialProgressColors: ChewieProgressColors(
         playedColor: Colors.red,
         handleColor: Colors.red,
         backgroundColor: Colors.grey,
-        bufferedColor: Colors.grey,
+        bufferedColor: Colors.black12,
       ),
       placeholder: Container(
         color: Colors.black,
