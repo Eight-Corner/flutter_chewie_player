@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:chewie_video_demo_corner/app/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class PlayerDemo extends StatefulWidget {
@@ -39,6 +40,9 @@ class _PlayerDemoState extends State<PlayerDemo> {
   }
 
   List<String> srcs = [
+    "https://res.cloudinary.com/dtdnarsy1/video/upload/v1661926846/videoplayback_lrigan.mp4",
+    "https://res.cloudinary.com/dtdnarsy1/video/upload/v1661926657/get_mbhcvn.mp4",
+    "https://res.cloudinary.com/dtdnarsy1/video/upload/v1661926678/get_eu56us.mp4",
     "https://res.cloudinary.com/dtdnarsy1/video/upload/v1661918926/ive_fmlybl.mp4",
     "https://res.cloudinary.com/dtdnarsy1/video/upload/v1661918923/instagram_video_kjgarl.mp4",
     "https://assets.mixkit.co/videos/preview/mixkit-spinning-around-the-earth-29351-large.mp4",
@@ -77,8 +81,21 @@ class _PlayerDemoState extends State<PlayerDemo> {
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
       autoPlay: true,
-      looping: false,
-      aspectRatio: _videoPlayerController1.value.aspectRatio,
+      looping: true,
+      // aspectRatio: _videoPlayerController1.value.aspectRatio,
+      deviceOrientationsAfterFullScreen: [
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ],
+      deviceOrientationsOnEnterFullScreen:
+          _videoPlayerController1.value.aspectRatio == 16 / 9
+              ? [
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight
+                ] : [
+                  DeviceOrientation.portraitUp,
+                  DeviceOrientation.portraitDown
+                ],
 
       // 설정 셋업
       additionalOptions: (context) {
@@ -113,7 +130,6 @@ class _PlayerDemoState extends State<PlayerDemo> {
       hideControlsTimer: const Duration(seconds: 3),
 
       // 플레이어 옵션:
-
       materialProgressColors: ChewieProgressColors(
         playedColor: Colors.red,
         handleColor: Colors.red,
@@ -125,6 +141,7 @@ class _PlayerDemoState extends State<PlayerDemo> {
       ),
       // autoInitialize: true,
     );
+
   }
 
   int currPlayIndex = 0;
@@ -152,7 +169,8 @@ class _PlayerDemoState extends State<PlayerDemo> {
             Expanded(
                 child: Center(
               child: _chewieController != null &&
-                      _chewieController!.videoPlayerController.value.isInitialized
+                      _chewieController!
+                          .videoPlayerController.value.isInitialized
                   ? Chewie(
                       controller: _chewieController!,
                     )
@@ -165,6 +183,17 @@ class _PlayerDemoState extends State<PlayerDemo> {
                       ],
                     ),
             )),
+            /*Expanded(
+              child: OrientationBuilder(builder: (context, orientation) {
+                if (MediaQuery.of(context).orientation == Orientation.landscape) {
+                  // if ()
+                  _chewieController?.enterFullScreen();
+                } else {
+                  // _chewieController?.exitFullScreen();
+                }
+                // return Container();
+                })
+            ),*/
             TextButton(
               onPressed: () {
                 _chewieController?.enterFullScreen();
@@ -192,8 +221,20 @@ class _PlayerDemoState extends State<PlayerDemo> {
                 ),
                 Expanded(
                   child: TextButton(
-                      onPressed: toggleVideo, child: const Text('비디오 전환')),
-                )
+                      onPressed: () {
+                        if (currPlayIndex == 0) {
+                          currPlayIndex = srcs.length - 1;
+                        } else {
+                          currPlayIndex -= 1;
+                        }
+                        this.initializePlayer();
+                      },
+                      child: const Text('이전 영상')),
+                ),
+                Expanded(
+                  child: TextButton(
+                      onPressed: toggleVideo, child: const Text('다음 영상')),
+                ),
               ],
             ),
           ],
