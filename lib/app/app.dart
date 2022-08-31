@@ -39,9 +39,11 @@ class _PlayerDemoState extends State<PlayerDemo> {
   }
 
   List<String> srcs = [
-    "https://assets.mixkit.co/videos/preview/mixkit-spinning-around-the-earth-29351-large.mp4",
-    "https://assets.mixkit.co/videos/preview/mixkit-daytime-city-traffic-aerial-view-56-large.mp4",
-    "https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4"
+    // "https://assets.mixkit.co/videos/preview/mixkit-spinning-around-the-earth-29351-large.mp4",
+    // "https://assets.mixkit.co/videos/preview/mixkit-daytime-city-traffic-aerial-view-56-large.mp4",
+    // "https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4"
+    "https://res.cloudinary.com/dtdnarsy1/video/upload/v1661918926/ive_fmlybl.mp4",
+    "https://res.cloudinary.com/dtdnarsy1/video/upload/v1661918923/instagram_video_kjgarl.mp4",
   ];
 
   Future<void> initializePlayer() async {
@@ -111,7 +113,7 @@ class _PlayerDemoState extends State<PlayerDemo> {
       materialProgressColors: ChewieProgressColors(
         playedColor: Colors.red,
         handleColor: Colors.red,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.grey,
         bufferedColor: Colors.grey,
       ),
       placeholder: Container(

@@ -23,5 +23,4 @@ flutter:
   uses-material-design: true
 
 assets:
-  - assets/videos/ive.mp4
-  - assets/videos/instagram_video.mp4
+  - assets/
