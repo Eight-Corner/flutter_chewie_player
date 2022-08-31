@@ -108,7 +108,6 @@ class _PlayerDemoState extends State<PlayerDemo> {
 
       // 플레이어 옵션:
       showControls: true,
-
       materialProgressColors: ChewieProgressColors(
         playedColor: Colors.red,
         handleColor: Colors.red,
@@ -137,7 +136,7 @@ class _PlayerDemoState extends State<PlayerDemo> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: widget.title,
-      theme: AppTheme.dark.copyWith(
+      theme: AppTheme.light.copyWith(
         platform: _platform ?? Theme.of(context).platform,
       ),
       home: Scaffold(
