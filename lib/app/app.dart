@@ -82,6 +82,7 @@ class _PlayerDemoState extends State<PlayerDemo> {
       videoPlayerController: _videoPlayerController1,
       autoPlay: true,
       looping: true,
+      // sub
       // aspectRatio: _videoPlayerController1.value.aspectRatio,
       deviceOrientationsAfterFullScreen: [
         DeviceOrientation.portraitUp,
@@ -113,6 +114,7 @@ class _PlayerDemoState extends State<PlayerDemo> {
       ),
 
       // 자막 세팅
+/*
       subtitle: Subtitles(subtitles),
       subtitleBuilder: (context, dynamic subtitle) => Container(
         padding: const EdgeInsets.all(10.0),
@@ -125,6 +127,7 @@ class _PlayerDemoState extends State<PlayerDemo> {
                 style: const TextStyle(color: Colors.black),
               ),
       ),
+*/
 
       // controls 숨김 타이머
       hideControlsTimer: const Duration(seconds: 3),
@@ -151,6 +154,14 @@ class _PlayerDemoState extends State<PlayerDemo> {
     currPlayIndex += 1;
     if (currPlayIndex >= srcs.length) {
       currPlayIndex = 0;
+    }
+    await initializePlayer();
+  }
+  Future<void> prevVideo() async {
+    await _videoPlayerController1.pause();
+    currPlayIndex -= 1;
+    if (currPlayIndex < 0) {
+      currPlayIndex = srcs.length;
     }
     await initializePlayer();
   }
@@ -221,14 +232,7 @@ class _PlayerDemoState extends State<PlayerDemo> {
                 ),
                 Expanded(
                   child: TextButton(
-                      onPressed: () {
-                        if (currPlayIndex == 0) {
-                          currPlayIndex = srcs.length - 1;
-                        } else {
-                          currPlayIndex -= 1;
-                        }
-                        this.initializePlayer();
-                      },
+                      onPressed: prevVideo,
                       child: const Text('이전 영상')),
                 ),
                 Expanded(
