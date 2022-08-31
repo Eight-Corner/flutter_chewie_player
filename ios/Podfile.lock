@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/wakelock/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   video_player_avfoundation: 9baba93256e79b502b12fb28317ffd930d08ec81
   wakelock: bd0d9e450e845007d009c8ae216aaed87f82fbf3
 
