@@ -78,6 +78,7 @@ class _PlayerDemoState extends State<PlayerDemo> {
       videoPlayerController: _videoPlayerController1,
       autoPlay: true,
       looping: true,
+      aspectRatio: _videoPlayerController1.value.aspectRatio,
       progressIndicatorDelay:
           bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
 
